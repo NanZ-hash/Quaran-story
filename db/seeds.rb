@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Joke.create(content:"somthing funny to write");
+Joke.create(content:"My greads");
+
+Story.create(title:"One Day",content:" once upon a time there were somthing here ! "); 
+Story.create(title:"Two Day",content:" once upon a time there were somthing here ! "); 
+
+Chapter.create(story_id: 1 ,title:"One week",content:" once upon a time there were somthing here ! "); 
+Chapter.create(story_id: 2 ,title:"Two week",content:" once upon a time there were somthing here ! "); 
