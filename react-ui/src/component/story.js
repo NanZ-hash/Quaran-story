@@ -1,14 +1,8 @@
 import React from 'react'
 
-class Story extends React.Component {
-  render() { 
-
-    return (
-      <> 
-      <h1> hello :O </h1>
-      </>
-    )
-  }
-}
-
+const Story = ({story} )  =>
+<div className="single-list" key={story.id}>
+    <h4>{story.title}</h4>
+    <p>{story.content}</p>
+    </div>
 export default Story;
