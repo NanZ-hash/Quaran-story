@@ -20,6 +20,7 @@ module Api::V1
 
     if @joke.save
       render json: @joke, status: :created
+    else
       render json: @joke.errors, status: :unprocessable_entity
     end
   end

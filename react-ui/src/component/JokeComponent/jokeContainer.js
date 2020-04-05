@@ -1,5 +1,6 @@
 import React from 'react'
 import Joke from './joke'
+import NewJoke from './newJoke'
 import { getJokes , postJokes , deleteJokeByID , editJokeByID } from './api'
 
 class JokeContainer extends React.Component {
@@ -22,6 +23,21 @@ componentDidMount() {
   .catch(err => console.log(err))
 }
   
+
+ // POST A NEW JOKE 
+ addNewJoke=(content)=> {
+  postJokes(content)
+  .then(res => {
+   console.log(res)
+   const jokeList = [ ...this.state.jokeList, res.data ]
+   this.setState({jokeList})
+   })
+   .catch(err => {
+   console.log(err)
+   })
+}
+
+
   render() { 
  // MAP all over the stories in the storyList
  const allJokes= this.state.jokeList.map( joke => {
@@ -31,6 +47,9 @@ componentDidMount() {
     return (
       <> 
       {allJokes}
+      <div>
+      <NewJoke newJokeSubmit={this.addNewJoke} />
+      </div>
       </>
     )
   }
