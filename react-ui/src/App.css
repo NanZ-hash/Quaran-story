@@ -36,16 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
 body{
  
   color: rgba(255,255,255,.75);
   font-family: 'Anonymous Pro', monospace;  
   background-color: rgb(25,25,25);  
   text-align: center;
-  height: 35vh;
 	width: 100%;
-	margin: 0;
-	padding: 0;
+	margin: auto ;
+	padding: 3vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
