@@ -1,15 +1,15 @@
 import React from 'react'
 import Story from './story'
-import {NewStory} from './newStory'
-import { getStories , postStories , deleteStoryByID} from './api'
+import NewStory from './newStory'
+import EditStory from './editStory'
+import { getStories , postStories , deleteStoryByID , editStoryByID} from './api'
 export default class StoryContainer extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-        storyList: []
+        storyList: [],
+        editingStoryById: null ,
     }
-    //Binding the functions to the state to change it in the front-end
-
 }
 
 componentDidMount() {
@@ -38,7 +38,6 @@ componentDidMount() {
  }
 
 // DELETE STORY
-
 deleteStory=(id)=> {
   deleteStoryByID(id)
   .then(res => {
@@ -50,24 +49,43 @@ deleteStory=(id)=> {
   .catch(err => console.log(err))
 }
 
-
+// passing the Id for the item we want to edit in the state..
+editingStory= id => { 
+  this.setState ({editingStoryById: id})
+}
 // UPDATE STORY
+editStory =(id, title, content) =>{
+  editStoryByID(id, title, content)
 
-
-
-
-
-
-
+  .then(res => {
+      console.log(res);
+      const storyList = this.state.storyList;
+      storyList[id-1] = {id, title, content}
+      this.setState(() => ({
+        storyList, 
+        editingStoryById: null
+      }))
+  })
+  .catch(err => console.log(err));
+}
 
   render() { 
         // MAP all over the stories in the storyList
         const allStories= this.state.storyList.map( story => {
+          // check if the state is not null then open the edit option.
+          if ( this.state.editingStoryById === story.id ) { 
+            return (<EditStory 
+                story={story} 
+                key={story.id} 
+                editStory={this.editStory} 
+            />)
+        } else {
           return (<Story story={story}
              key={story.id}
-             deleteStoryHandler={this.deleteStory} />)
-         })
-
+             deleteStoryHandler={this.deleteStory}
+             editingStory={this.editingStory}  />)
+            }
+          })
     return (
       <> 
       <h1>Story </h1>

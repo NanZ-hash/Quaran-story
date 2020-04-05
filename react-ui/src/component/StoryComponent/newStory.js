@@ -1,6 +1,6 @@
 import React from 'react';
  
-export const NewStory = ({newStorySubmit = e => e}) => {
+ const NewStory = ({newStorySubmit = e => e}) => {
     let title, content
     const submit = e => {
         e.preventDefault()
@@ -27,3 +27,5 @@ export const NewStory = ({newStorySubmit = e => e}) => {
         </form>
     )
 }
+
+export default NewStory
