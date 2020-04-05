@@ -1,6 +1,6 @@
 import React from 'react'
 import EditStory from './editStory'
-//passing thr parameters for the story function to operate 
+
 export default class Story extends React.Component { 
 
 

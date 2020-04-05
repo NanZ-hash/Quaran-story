@@ -4,29 +4,28 @@ export default class EditJoke extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            id: this.props.joke.id,
-            content: this.props.joke.content
+            id: this.props.id,
+            content: this.props.content
         }
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
     }
-
 
     handleChange = (e) => {
-        this.setState({[e.target.name]: e.target.value})
+        this.setState({
+            [e.target.name]: e.target.value
+        })
     }
 
-
-    handleSubmit(e){
+    editJoke= e =>{ 
         e.preventDefault();
-        const { id, content } = this.state;
-        this.props.editJoke(id,content);
-    }
-
+        const editedContent = { 
+            content: this.state.content,
+        }
+        this.props.editJoke(this.props.id, editedContent);
+    };
 
     render(){
         return(
-            <form onSubmit={this.handleSubmit}>
+            <form>
                 <div>
             <textarea  name="content"
                     type="text"
@@ -34,7 +33,7 @@ export default class EditJoke extends React.Component {
                     value={this.state.content}
                     onChange={this.handleChange} />
                     </div>
-            <button>Update Joke</button>
+            <button onClick={this.editJoke}>Update Joke</button>
         </form>  
         )
     }

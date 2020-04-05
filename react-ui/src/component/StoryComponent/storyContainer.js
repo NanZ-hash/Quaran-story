@@ -53,21 +53,20 @@ deleteStory=(id)=> {
 editingStory= id => { 
   this.setState ({editingStoryById: id})
 }
+
+
 // UPDATE STORY
 editStory =(id, editedStory) =>{
   editStoryByID(id, editedStory)
   .then(res => {
       console.log(res);
       const storyList = this.state.storyList;
-
       storyList.forEach((item, index) => {
         if (item.id === id) {
           storyList[index].title = editedStory.title;
           storyList[index].content = editedStory.content;
         }
       });
-
-      // Update the menu items list in the parent to the new list we have just edited
       this.setState({storyList})
   })
   .catch(err => console.log(err));

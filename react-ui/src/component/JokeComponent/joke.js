@@ -1,9 +1,23 @@
 import React from 'react' 
- const Joke = ({joke , deleteJokeHandler =e=>e , editingJoke =e=>e}) =>
- <div key={joke.id}> 
-     <p>{joke.content}</p>
-     <button onClick={ ()=> editingJoke(joke.id)}>Edit</button>
-     <button onClick={()=> deleteJokeHandler(joke.id)}>Delete</button>
-     </div>
-export default Joke
+import EditJoke from './editJoke'
+
+ export default class Joke extends React.Component { 
+    
+    deleteJokeHandler =e=>{ 
+        this.props.deleteJokeHandler(this.props.id);
+    }
+ 
+    render () { 
+
+        return ( <div> 
+            <p>{this.props.content}</p>
+            <EditJoke id={this.props.id}
+             content={this.props.content} 
+             editJoke={this.props.editJoke}/>
+            <button onClick={this.deleteJokeHandler}>Delete</button>
+            </div>
+            ) 
+
+    }
+}
 

@@ -7,25 +7,15 @@ export default class EditStory extends React.Component {
             title: this.props.title,
             content: this.props.content
         }
-        // this.handleChange = this.handleChange.bind(this)
-        // this.handleSubmit = this.handleSubmit.bind(this)
     }
-
 
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
-
-    // handleSubmit(e){
-    //     e.preventDefault();
-    //     const { id, title,content } = this.state;
-    //     this.props.editStory(id,title,content );
-    // }
     
     editStory= e =>{ 
-        // this.props.editingStory(this.props.id);
         e.preventDefault();
         const editedStory = { 
             title: this.state.title,
@@ -53,7 +43,6 @@ export default class EditStory extends React.Component {
                     onChange={this.handleChange} />
                     </div>
                     <button onClick={this.editStory}>Update Story</button>
-            {/* <button>Update Story</button> */}
         </form>  
         )
     }
