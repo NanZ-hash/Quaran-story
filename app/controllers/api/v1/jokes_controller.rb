@@ -41,7 +41,7 @@ module Api::V1
       head :no_content, status: :ok
     else
       render json: @joke.errors, status: :unprocessable_entity
-    end      
+    end 
   end
 
   private

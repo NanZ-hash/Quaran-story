@@ -37,12 +37,26 @@ componentDidMount() {
    })
 }
 
+// DELETE JOKE
+deleteJoke=(id)=> {
+  deleteJokeByID(id)
+  .then(res => {
+      const jokeList = this.state.jokeList.filter(
+          joke => joke.id !== id
+      )
+      this.setState({jokeList})
+  })
+  .catch(err => console.log(err))
+}
+
+
 
   render() { 
  // MAP all over the stories in the storyList
  const allJokes= this.state.jokeList.map( joke => {
   return (<Joke joke={joke}
-    key={joke.id} />)
+    key={joke.id} 
+    deleteJokeHandler={this.deleteJoke}/>)
  })
     return (
       <> 
