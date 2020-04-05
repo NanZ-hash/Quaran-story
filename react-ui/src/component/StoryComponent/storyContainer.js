@@ -1,7 +1,7 @@
 import React from 'react'
 import Story from './story'
 import NewStory from './newStory'
-import EditStory from './editStory'
+
 import { getStories , postStories , deleteStoryByID , editStoryByID} from './api'
 export default class StoryContainer extends React.Component {
   constructor(props){
@@ -54,37 +54,36 @@ editingStory= id => {
   this.setState ({editingStoryById: id})
 }
 // UPDATE STORY
-editStory =(id, title, content) =>{
-  editStoryByID(id, title, content)
-
+editStory =(id, editedStory) =>{
+  editStoryByID(id, editedStory)
   .then(res => {
       console.log(res);
       const storyList = this.state.storyList;
-      storyList[id-1] = {id, title, content}
-      this.setState(() => ({
-        storyList, 
-        editingStoryById: null
-      }))
+
+      storyList.forEach((item, index) => {
+        if (item.id === id) {
+          storyList[index].title = editedStory.title;
+          storyList[index].content = editedStory.content;
+        }
+      });
+
+      // Update the menu items list in the parent to the new list we have just edited
+      this.setState({storyList})
   })
   .catch(err => console.log(err));
 }
 
   render() { 
         // MAP all over the stories in the storyList
-        const allStories= this.state.storyList.map( story => {
-          // check if the state is not null then open the edit option.
-          if ( this.state.editingStoryById === story.id ) { 
-            return (<EditStory 
-                story={story} 
-                key={story.id} 
-                editStory={this.editStory} 
-            />)
-        } else {
-          return (<Story story={story}
-             key={story.id}
+        const allStories= this.state.storyList.map( (story, index) => {
+          return (
+          <Story 
+             key={index}
+             id={story.id}
+             title={story.title}
+             content={story.content}
              deleteStoryHandler={this.deleteStory}
-             editingStory={this.editingStory}  />)
-            }
+             editStory={this.editStory}  />)
           })
     return (
       <> 

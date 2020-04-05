@@ -17,8 +17,8 @@ const deleteStoryByID =  id => {
 }
 
 //UPDATE by ID
-const editStoryByID = (id,title,content) => { 
-    return axios.put(`${apiUrl}/api/v1/stories/${id}`,{ story: {title,content} })
+const editStoryByID = (id,story) => { 
+    return axios.patch(`${apiUrl}/api/v1/stories/${id}`,{story})
 }
 
 

@@ -3,30 +3,41 @@ export default class EditStory extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            id: this.props.story.id,
-            title: this.props.story.title,
-            content: this.props.story.content
+            id: this.props.id,
+            title: this.props.title,
+            content: this.props.content
         }
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
+        // this.handleChange = this.handleChange.bind(this)
+        // this.handleSubmit = this.handleSubmit.bind(this)
     }
 
 
     handleChange = (e) => {
-        this.setState({[e.target.name]: e.target.value})
+        this.setState({
+            [e.target.name]: e.target.value
+        })
     }
 
-
-    handleSubmit(e){
+    // handleSubmit(e){
+    //     e.preventDefault();
+    //     const { id, title,content } = this.state;
+    //     this.props.editStory(id,title,content );
+    // }
+    
+    editStory= e =>{ 
+        // this.props.editingStory(this.props.id);
         e.preventDefault();
-        const { id, title, content } = this.state;
-        this.props.editStory(id, title, content);
-    }
+        const editedStory = { 
+            title: this.state.title,
+            content: this.state.content,
+        }
+        this.props.editStory(this.props.id, editedStory);
+    };
 
 
     render(){
         return(
-            <form onSubmit={this.handleSubmit}>
+            <form>
                 <div>
             <input  name="title"
                     type="text"
@@ -41,7 +52,8 @@ export default class EditStory extends React.Component {
                     value={this.state.content}
                     onChange={this.handleChange} />
                     </div>
-            <button>Update Story</button>
+                    <button onClick={this.editStory}>Update Story</button>
+            {/* <button>Update Story</button> */}
         </form>  
         )
     }
