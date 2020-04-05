@@ -1,14 +1,7 @@
-import React from 'react'
-import'./App.css'; 
-export default class App extends React.Component {
-  render() { 
-
-    return (
-      <> 
-      <h1> hello :O </h1>
-      </>
-    )
-  }
-}
-
+import React from 'react' 
+ const Joke = ({joke}) =>
+ <div key={joke.id}> 
+     <p>{joke.content}</p>
+     </div>
+export default Joke
 
