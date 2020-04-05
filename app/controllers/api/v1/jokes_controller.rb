@@ -19,8 +19,7 @@ module Api::V1
     @joke = Joke.new(joke_params)
 
     if @joke.save
-      render json: @joke, status: :created, location: @joke
-    else
+      render json: @joke, status: :created
       render json: @joke.errors, status: :unprocessable_entity
     end
   end
@@ -37,6 +36,11 @@ module Api::V1
   # DELETE /jokes/1
   def destroy
     @joke.destroy
+    if @joke.destroy
+      head :no_content, status: :ok
+    else
+      render json: @joke.errors, status: :unprocessable_entity
+    end      
   end
 
   private
