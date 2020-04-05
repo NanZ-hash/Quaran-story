@@ -1,7 +1,8 @@
 import React from 'react'
 import axios from 'axios'
-import apiUrl from '../apiConfig'
+import apiUrl from '../../apiConfig'
 import Story from './story'
+import { getData } from '../api'
 class StoryContainer extends React.Component {
   constructor(props){
     super(props)
@@ -9,18 +10,19 @@ class StoryContainer extends React.Component {
         storyList: []
     }
 }
-componentDidMount() {
 
+componentDidMount() {
   //GET ALL STORIES ..
-    axios.get(`${apiUrl}/api/v1/stories`)
-    .then(response => {
-        console.log(response)
-        this.setState({
-          storyList: response.data
-        })
-    })
-    .catch(error => console.log(error))
+    getData()
+    .then(res => {
+      console.log(res)
+      this.setState({
+        storyList: res.data
+      })
+  })
+  .catch(err => console.log(err))
 }
+
   render() { 
         // MAP all over the stories API
         const allStories= this.state.storyList.map( story => {
