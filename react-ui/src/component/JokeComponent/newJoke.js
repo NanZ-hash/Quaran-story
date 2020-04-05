@@ -6,7 +6,6 @@ import React from 'react';
         e.preventDefault()
         newJokeSubmit(content.value)
         content.value = ''
-        content.focus()
     }
 
     return (

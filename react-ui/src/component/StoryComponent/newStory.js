@@ -7,7 +7,6 @@ import React from 'react';
         newStorySubmit(title.value, content.value)
         title.value = ''
         content.value = ''
-        title.focus()
     }
 
     return (
