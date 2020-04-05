@@ -8,4 +8,10 @@ const getStories = story => {
 const postStories = (title,content) =>{ 
     return axios.post(`${apiUrl}/api/v1/stories`, { story: {title,content} })
 }
-export { getStories , postStories }
+
+const deleteStoryByID =  id => { 
+    return axios.delete(`${apiUrl}/api/v1/stories/${id}`)
+}
+
+
+export { getStories , postStories , deleteStoryByID }

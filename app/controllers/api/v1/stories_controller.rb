@@ -37,6 +37,11 @@ module Api::V1
   # DELETE /stories/1
   def destroy
     @story.destroy
+    if @story.destroy
+      head :no_content, status: :ok
+    else
+      render json: @story.errors, status: :unprocessable_entity
+    end      
   end
 
   private

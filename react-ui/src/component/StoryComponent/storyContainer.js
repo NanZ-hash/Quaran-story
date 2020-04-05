@@ -1,14 +1,15 @@
 import React from 'react'
 import Story from './story'
 import {NewStory} from './newStory'
-import { getStories , postStories } from './api'
+import { getStories , postStories , deleteStoryByID} from './api'
 export default class StoryContainer extends React.Component {
   constructor(props){
     super(props)
     this.state = {
         storyList: []
     }
-    this.addNewStory = this.addNewStory.bind(this)
+    //Binding the functions to the state to change it in the front-end
+
 }
 
 componentDidMount() {
@@ -36,7 +37,21 @@ componentDidMount() {
     })
  }
 
+// DELETE STORY
 
+deleteStory=(id)=> {
+  deleteStoryByID(id)
+  .then(res => {
+      const storyList = this.state.storyList.filter(
+          story => story.id !== id
+      )
+      this.setState({storyList})
+  })
+  .catch(err => console.log(err))
+}
+
+
+// UPDATE STORY
 
 
 
@@ -48,7 +63,9 @@ componentDidMount() {
   render() { 
         // MAP all over the stories in the storyList
         const allStories= this.state.storyList.map( story => {
-          return (<Story story={story} key={story.id} />)
+          return (<Story story={story}
+             key={story.id}
+             deleteStoryHandler={this.deleteStory} />)
          })
 
     return (
